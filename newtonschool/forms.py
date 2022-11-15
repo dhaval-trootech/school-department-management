@@ -3,8 +3,12 @@ from .models import School
 
 
 class SchoolModelForm(forms.ModelForm):
-
     class Meta:
         model = School
-        fields = ['city', 'established_year', 'rating', 'owner_name']
-    city = forms.CharField(label="Name Your City")
+        fields = ['established_year', 'rating', 'address', 'owner_name']
+        widgets = {
+            'address': forms.PasswordInput(attrs={'size': 10}),
+        }
+        error_messages = {
+            'owner_name': {'required': "Please Enter Correct Name"}
+        }

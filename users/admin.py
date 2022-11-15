@@ -1,13 +1,8 @@
 from django.contrib import admin
-from .models import Teacher, Student
+from .models import SchoolUser
 
 
 # Register your models here.
-@admin.register(Teacher)
-class TeacherAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin):
+@admin.register(SchoolUser)
+class SchoolUSerAdmin(admin.ModelAdmin):
     pass

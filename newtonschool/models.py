@@ -13,10 +13,3 @@ class School(models.Model):
     owner_name = models.CharField(max_length=25)
     address = models.TextField(max_length=100)
     rating = models.CharField(max_length=5, choices=DATA_CHOICE)
-
-
-class CustomUser(AbstractUser):
-    """
-        Multi-Level Inheritance with AbstractUser > AbstractBaseUser > models.Model
-    """
-    city = models.CharField(max_length=55)

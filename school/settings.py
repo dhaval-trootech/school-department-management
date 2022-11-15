@@ -104,7 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'newtonschool.CustomUser'
+AUTH_USER_MODEL = 'users.SchoolUser'
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 

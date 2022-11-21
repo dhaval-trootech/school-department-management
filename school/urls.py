@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home_page, name='homepage'),
     path('teachers/', include('teachers.urls')),
     path('newtonschool/', include('newtonschool.urls')),
+    path('users/', include('users.urls')),
 ]

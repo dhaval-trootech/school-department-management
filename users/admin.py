@@ -4,5 +4,5 @@ from .models import SchoolUser
 
 # Register your models here.
 @admin.register(SchoolUser)
-class SchoolUSerAdmin(admin.ModelAdmin):
+class SchoolUserAdmin(admin.ModelAdmin):
     pass

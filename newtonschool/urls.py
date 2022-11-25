@@ -3,5 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('schoolform/', views.school_model_form, name='school_form')
+    path('', views.newton_school_dashboard, name='school_dashboard'),
+    path('about/', views.newton_school_about, name='school_about'),
+
 ]

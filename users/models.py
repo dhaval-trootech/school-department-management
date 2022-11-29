@@ -15,5 +15,4 @@ class SchoolUser(AbstractUser):
     permanent_address = models.TextField(max_length=200, blank=True)
     user_type = models.CharField(max_length=10, choices=USER_CHOICE, default='Unknown')
 
-    REQUIRED_FIELDS = ['birthdate', 'phone', 'standard', 'subject',
-                       'local_address', 'permanent_address', 'user_type']
+    REQUIRED_FIELDS = ['phone', 'local_address']

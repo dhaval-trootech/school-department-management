@@ -1,3 +1,8 @@
 {% extends "./student_login.html" %}
 
 {% load static %}
+
+<!--Custom Blocks for Override-->
+{% block teacher_reg_url %}
+<p>Don't have an account? <a href="{% url 'teacher_reg' %}" class="link-info">Register here</a></p>
+{% endblock %}

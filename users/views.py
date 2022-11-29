@@ -1,7 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SchoolUserModelForm
-from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from .forms import SchoolUserModelForm
 
 
 # Create your views here.
@@ -9,11 +9,8 @@ from django.urls import reverse
 def student_registration(request):
     if request.method == 'POST':
         form = SchoolUserModelForm(request.POST)
-        print("i am type of FORM++", type(form))
         if form.is_valid():
-            print("FORM CLEANED_DATA++", form.cleaned_data, end='\n\n')
             # Save Data to database
-            print("FORM DICT+++", form.__dict__)
             form.save()
             return HttpResponseRedirect(reverse('school_user_logged'))
     else:

@@ -17,33 +17,35 @@
 
 <form method="POST" novalidate>
     {% csrf_token %}    <!-- Django Cross Site Verification -->
-
 {% block teacher_reg %}
   <div class="form-row mt-2">
     <div class="col-md-9 mb-3">
-        {{form.first_name}}
+      {{form.first_name}} <span class="errorlist"> {{form.first_name.errors|striptags}} </span>
     </div>
     <div class="col-md-9 mb-3">
-        {{form.last_name}}
+        {{form.last_name}}  <span class="errorlist"> {{form.last_name.errors|striptags}} </span>
     </div>
     <div class="col-md-9 mb-3">
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroupPrepend2">@</span>
         </div>
-        {{form.username}}
+        {{form.username}}  <span class="errorlist m-auto"> {{form.username.errors|striptags}} </span>
       </div>
     </div>
   </div>
   <div class="form-row">
     <div class="col-md-9 mb-3">
-        {{form.email}}
+        {{form.email}}  <span class="errorlist"> {{form.email.errors|striptags}} </span>
     </div>
     <div class="col-md-9 mb-3">
-        {{form.subject}}
+        {{form.subject}}  <span class="errorlist"> {{form.subject.errors|striptags}} </span>
     </div>
     <div class="col-md-9 mb-3">
-        {{form.password}}
+        {{form.password}}   <span class="errorlist"> {{form.password.errors|striptags}} </span>
+    </div>
+    <div class="col-md-9 mb-3">
+        {{form.confirm_password}}  <span class="errorlist">{{form.confirm_password.errors|striptags}} </span>  {{ form.non_field_errors }}
     </div>
   </div>
   {% endblock %}

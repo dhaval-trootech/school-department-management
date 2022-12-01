@@ -806,6 +806,25 @@ section {
     }
 }
 
+
+.login-icon {
+    width: 10%;
+}
+
+.navbar{
+    justify-content: end;
+}
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 450px) {
     html {
         font-size: 50%;
@@ -813,4 +832,3 @@ section {
 }
 
 
-/*# sourceMappingURL=style.css.map */

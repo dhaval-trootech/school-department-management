@@ -11,8 +11,11 @@ class SchoolUser(AbstractUser):
     phone = models.IntegerField(null=True, blank=True)
     standard = models.IntegerField(null=True, blank=True)
     subject = models.CharField(max_length=30, blank=True)
+    email = models.EmailField(unique=True)
     local_address = models.TextField(max_length=200, blank=True)
     permanent_address = models.TextField(max_length=200, blank=True)
-    user_type = models.CharField(max_length=10, choices=USER_CHOICE, default='Unknown')
+    user_type = models.CharField(max_length=10, choices=USER_CHOICE)
+    terms_conditions = models.BooleanField(default=False)
+    user_icon = models.ImageField(upload_to='images', blank=True)
 
-    REQUIRED_FIELDS = ['phone', 'local_address']
+    REQUIRED_FIELDS = ['local_address', 'email', 'user_icon']

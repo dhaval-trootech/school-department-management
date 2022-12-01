@@ -30,6 +30,33 @@ background-size: auto 100%;
 }
 
 
+.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control, .input-group>.form-control-plaintext {
+    width: 80%;
+}
+
+
+.form-check-input {
+    margin-top: 0.3rem;
+    margin-left: 0.4rem;
+}
+
+.form-check {
+    padding-left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* MEDIA QUERIES STARTS ++++++ */
 
 @media (min-width: 1025px) {

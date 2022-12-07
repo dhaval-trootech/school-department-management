@@ -37,20 +37,22 @@
             <li><a href="{% url 'school_about' %}">ABOUT</a></li>
             <li><a href="gallery1.html">GALLERY</a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="#" class="bg-info">WELCOME - {{ request.user}} </a></li>
+            <li><a href="#" class="bg-info">WELCOME - {{ request.user }} </a></li>
             <li><a href="{% url 'logout' %}">LOGOUT</a></li>
             {% else %}
             <li><a href="{% url 'users_login' %}">USER LOGIN</a></li>
             {% endif %}
         </ul>
         {% if request.user.is_authenticated %}
-        <img class="login-icon" src="{% static 'images/login-icon.png' %}" alt="User Profile Image"/>
+        <img class="login-icon" src="{{ request.user.user_icon.url }}" alt="User Profile Image"/>
+
         {% endif %}
     </nav>
 
 </header>
 
 <!-- header section ends -->
+
 
 <!-- home section starts  -->
 
@@ -137,6 +139,9 @@
 </section>
 
 <!-- footer section ends -->
+
+<!-- bootstrap js file link  -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
 
 <!-- custom js file link  -->
 <script src="{% static 'newtonschool/js/school.js' %}"></script>

@@ -16,6 +16,6 @@ class SchoolUser(AbstractUser):
     permanent_address = models.TextField(max_length=200, blank=True)
     user_type = models.CharField(max_length=10, choices=USER_CHOICE)
     terms_conditions = models.BooleanField(default=False)
-    user_icon = models.ImageField(upload_to='images', blank=True)
+    user_icon = models.ImageField(upload_to='images/profile-icon', blank=True)
 
     REQUIRED_FIELDS = ['local_address', 'email', 'user_icon']

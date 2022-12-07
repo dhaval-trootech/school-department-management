@@ -57,8 +57,8 @@
         </div>
         <div class="col-md-9 mb-3">
             {{form.confirm_password.label_tag}}
-            {{form.confirm_password}} <span class="errorlist">{{form.confirm_password.errors|striptags}} </span>
-            {{form.non_field_errors}}
+            {{form.confirm_password}} <span class="errorlist">  {{form.non_field_errors|striptags}} </span>
+
         </div>
     </div>
     {% endblock %}
@@ -70,7 +70,7 @@
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
     <button class="btn btn-danger" type="reset">Clear Form</button>
-
+    <a href="{% url 'users_login' %}" class="btn btn-outline-success">Go to Login</a>
 </form>
 
 <!--    Student Registration Form ENDS ////-->

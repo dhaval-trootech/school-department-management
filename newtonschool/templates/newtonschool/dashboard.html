@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newton School</title>
-    <link rel="shortcut icon" type="images" href="images/logo.jpg">
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -35,18 +34,27 @@
         <ul>
             <li><a href="{% url 'school_dashboard' %}">HOME</a></li>
             <li><a href="{% url 'school_about' %}">ABOUT</a></li>
-            <li><a href="gallery1.html">GALLERY</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="#" class="bg-info">WELCOME - {{ request.user }} </a></li>
-            <li><a href="{% url 'logout' %}">LOGOUT</a></li>
-            {% else %}
+            {% if not request.user.is_authenticated %}
             <li><a href="{% url 'users_login' %}">USER LOGIN</a></li>
             {% endif %}
         </ul>
         {% if request.user.is_authenticated %}
-        <img class="login-icon" src="{{ request.user.user_icon.url }}" alt="User Profile Image"/>
-
+        <!--        bootstrap dropdown burger-->
+        <div class="dropdown navbar-nav">
+            {% if request.user.user_icon %}
+            <img class="login-icon" src="{{ request.user.user_icon.url }}" alt="User Profile Image"/>
+            {% endif %}
+            <a href="#" class="user-pf">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{% url 'user_profile_edit' %}">My Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </div>
         {% endif %}
+        <!--        bootstrap dropdown burger End-->
     </nav>
 
 </header>
@@ -140,9 +148,11 @@
 
 <!-- footer section ends -->
 
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- bootstrap js file link  -->
 <script src="{% static 'js/bootstrap.js' %}"></script>
-
 <!-- custom js file link  -->
 <script src="{% static 'newtonschool/js/school.js' %}"></script>
 

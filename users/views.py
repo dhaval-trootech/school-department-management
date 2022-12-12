@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from .forms import SchoolUserModelForm, SchoolUserLoginForm, FormChangePassword
+from .forms import SchoolUserModelForm, SchoolUserLoginForm, FormChangePassword, SchoolUserEditForm
+from .models import SchoolUser
 
 
 # Create your views here.
@@ -57,7 +58,7 @@ def users_login(request):
             uname = user_login_form.cleaned_data.get('username')
             upass = user_login_form.cleaned_data.get('password')
             user = authenticate(username=uname, password=upass)
-            print("I am UserAuth++", type(user), type(request.user))
+            print("I am UserAuth++", type(user), type(request.user), end='\n\n')
             if user is not None:
                 login(request, user)
                 return redirect('school_dashboard')
@@ -84,10 +85,10 @@ def log_out(request):
 # User Password Reset
 def user_change_pass(request):
     if request.user.is_authenticated:
-        breakpoint()
         if request.method == "POST":
             user_pass_change_form = FormChangePassword(user=request.user, data=request.POST)
-            if user_pass_change_form.is_valid:
+            if user_pass_change_form.is_valid():
+                print("DICT++", user_pass_change_form.__dict__)
                 user_pass_change_form.save()
                 return HttpResponse("Successfully Changed your password")
         else:
@@ -95,3 +96,27 @@ def user_change_pass(request):
         return render(request, "users/change_password.html", {'form': user_pass_change_form})
     else:
         return HttpResponseRedirect(reverse('users_login'))
+
+
+def users_dataset(request):
+    context = {"dataset": SchoolUser.objects.all()}
+    return render(request, "users/users_dataset.html", context)
+
+
+def user_detail_data(request, ids):
+    SchoolUser.objects.get(id=ids).delete()
+    return HttpResponseRedirect(reverse('users_dataset'))
+
+
+def user_profile_edit(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            user_edit_form = SchoolUserEditForm(request.POST, request.FILES, instance=request.user)
+            if user_edit_form.is_valid():
+                user_edit_form.save()
+                return HttpResponseRedirect(reverse('school_dashboard'))
+        else:
+            user_edit_form = SchoolUserEditForm(instance=request.user)
+    else:
+        return HttpResponseRedirect(reverse('users_login'))
+    return render(request, "users/user_profile_edit.html", {'user_edit_fm': user_edit_form})

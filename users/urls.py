@@ -9,5 +9,7 @@ urlpatterns = [
     path('registration/teacher/', views.teacher_registration, name='teacher_reg'),
     path('submitted/', views.thanks_submission, name='user_submit'),
     path('password_reset/', views.user_change_pass, name='user_change_pass'),
-
+    path('datasets/', views.users_dataset, name='users_dataset'),
+    path('user_detail_data/<int:ids>/', views.user_detail_data, name='user_detail_data'),
+    path('edit/', views.user_profile_edit, name='user_profile_edit'),
 ]

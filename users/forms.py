@@ -7,20 +7,19 @@ from django.contrib.auth import authenticate
 
 
 class SchoolUserModelForm(forms.ModelForm):
-    confirm_password = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(
+    confirm_password = forms.CharField(required=False, label='Confirm Password', widget=forms.PasswordInput(
         attrs={'class': 'form-control'}), error_messages={'required': "please confirm your password."})
 
     class Meta:
         model = SchoolUser
         fields = ['first_name', 'last_name', 'username', 'user_icon', 'email', 'birthdate', 'phone', 'standard',
-                  'subject', 'password', 'confirm_password', 'terms_conditions']
+                  'subject', 'password', 'terms_conditions']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'user_icon': forms.FileInput(attrs={}),
-            'email': forms.EmailInput(
-                attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'birthdate': forms.DateInput(attrs={}),
             'phone': forms.NumberInput(attrs={}),
             'standard': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -50,7 +49,7 @@ class SchoolUserModelForm(forms.ModelForm):
 
         if password != confirm_password:
             raise ValidationError(
-                "password and confirm_password does not match."
+                "password and confirm_password do not match."
             )
         return cleaned_data
 
@@ -117,3 +116,25 @@ class FormChangePassword(PasswordChangeForm):
             self.fields[field].widget.attrs = {'class': 'form-control'}
         for field_name, field in self.fields.items():
             self.fields[field_name].widget.attrs['placeholder'] = field.label
+
+
+class SchoolUserEditForm(SchoolUserModelForm):
+    username = forms.CharField(label='Username', required=False,
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': True}))
+
+    class Meta:
+        model = SchoolUser
+        fields = ['first_name', 'last_name', 'username', 'user_icon', 'email', 'phone', 'local_address', ]
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'user_icon': forms.FileInput(attrs={}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.NumberInput(attrs={'class': 'form-control'}),
+            'local_address': forms.Textarea(attrs={'class': 'form-control', 'cols': 10, 'rows': 2}),
+
+        }
+
+    def clean(self):
+        return self.cleaned_data

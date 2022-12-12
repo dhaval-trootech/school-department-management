@@ -13,6 +13,13 @@ def choose_user(request):
 
 
 def student_registration(request):
+    """
+    this is Student Registration form method. we are specifying users/registration/student
+    URL for students only. SchoolUserModelForm have a Meta class where we re-used
+    existing django models. that models automatically converted into input field forms.
+    when any new registration hits this method it's Student registration hence we use
+    reg.user_type = 'S'. it will add user type 'Student' in the database along with user.
+    """
     if request.method == 'POST':
         student_reg_form = SchoolUserModelForm(request.POST, request.FILES)
         print("I AM REQUEST POST++ DATA++", request.POST)
@@ -32,6 +39,13 @@ def student_registration(request):
 
 
 def teacher_registration(request):
+    """
+    this is Teacher Registration form method. we are specifying users/registration/teacher
+    URL for teachers only. SchoolUserModelForm have a Meta class where we re-used
+    existing django models. that models automatically converted into input field forms.
+    when any new registration hits this method it's Teacher registration hence we use
+    reg.user_type = 'T'. it will add user type 'Teacher' in the database along with user.
+    """
     if request.method == 'POST':
         teacher_reg_form = SchoolUserModelForm(request.POST, request.FILES)
         if teacher_reg_form.is_valid():
@@ -48,10 +62,21 @@ def teacher_registration(request):
 
 
 def thanks_submission(request):
+    """
+    when any Student or Teacher Successfully registered their profile in our
+    website, this method renders a Thank you for your registration HTML template.
+    """
     return render(request, 'users/user_success_submit.html')
 
 
 def users_login(request):
+    """
+    after succesfully registration for both of the user Student & Teacher, they
+    need to Authenticate their self in our website. this method accepts POST
+    request when user try to log in & Authenticate himself/herself in this website.
+    this method using backend auth to verify user credentials. user must have to verify
+    their credentials according to their previous registration credentials.
+    """
     if request.method == 'POST':
         user_login_form = SchoolUserLoginForm(request.POST)
         if user_login_form.is_valid():
@@ -84,6 +109,12 @@ def log_out(request):
 
 # User Password Reset
 def user_change_pass(request):
+    """
+    this method is for changing user's password, keep in mind that here this
+    form inherited Django built-in PasswordChangeForm. this form is not model form.
+    it is built-in Django password change from which inherits SetPassword form.
+    here SetPassword form directly inherits from (forms.Form).
+    """
     if request.user.is_authenticated:
         if request.method == "POST":
             user_pass_change_form = FormChangePassword(user=request.user, data=request.POST)
@@ -109,6 +140,12 @@ def user_detail_data(request, ids):
 
 
 def user_profile_edit(request):
+    """
+    1 - user can change/update their account information.
+    2 - this method verifies SchoolUserEditForm and generated cleaned_data.
+    3 - SchoolUserEditForm carrying needful user fields.
+    4 - this form inherit SchoolUserModelForm, which is a ModelForm.
+    """
     if request.user.is_authenticated:
         if request.method == "POST":
             user_edit_form = SchoolUserEditForm(request.POST, request.FILES, instance=request.user)

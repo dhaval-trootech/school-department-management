@@ -1,0 +1,21 @@
+input[type=email], input[type=number] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label::after {
+    content: '*';
+    color: red;
+    margin-left: 3px;
+}
+
+.partial-disabled-label::after {
+    all: unset;
+}
+
+.partial-disabled {
+    background-color: #787878;
+}

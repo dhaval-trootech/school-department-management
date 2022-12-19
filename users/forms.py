@@ -110,6 +110,7 @@ class SchoolUserLoginForm(forms.Form):
 
 
 class FormChangePassword(PasswordChangeForm):
+
     def __init__(self, *args, **kwargs):
         super(PasswordChangeForm, self).__init__(*args, **kwargs)
         for field in ('old_password', 'new_password1', 'new_password2'):
@@ -119,17 +120,14 @@ class FormChangePassword(PasswordChangeForm):
 
 
 class SchoolUserEditForm(SchoolUserModelForm):
-    username = forms.CharField(label='Username', required=False,
-                               widget=forms.TextInput(attrs={'class': 'form-control', 'readonly': True}))
-
     class Meta:
         model = SchoolUser
         fields = ['first_name', 'last_name', 'username', 'user_icon', 'email', 'phone', 'local_address', ]
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'user_icon': forms.FileInput(attrs={}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'readonly': True}),
+            'user_icon': forms.FileInput(attrs={'class': 'user-icon', }),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone': forms.NumberInput(attrs={'class': 'form-control'}),
             'local_address': forms.Textarea(attrs={'class': 'form-control', 'cols': 10, 'rows': 2}),
@@ -137,4 +135,5 @@ class SchoolUserEditForm(SchoolUserModelForm):
         }
 
     def clean(self):
-        return self.cleaned_data
+        cleaned_data = super(SchoolUserModelForm, self).clean()
+        return cleaned_data

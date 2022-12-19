@@ -4,10 +4,11 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from .forms import SchoolUserModelForm, SchoolUserLoginForm, FormChangePassword, SchoolUserEditForm
 from .models import SchoolUser
+import time
+from django.contrib import messages
 
 
 # Create your views here.
-
 def choose_user(request):
     return render(request, "users/user_choice.html")
 
@@ -151,7 +152,8 @@ def user_profile_edit(request):
             user_edit_form = SchoolUserEditForm(request.POST, request.FILES, instance=request.user)
             if user_edit_form.is_valid():
                 user_edit_form.save()
-                return HttpResponseRedirect(reverse('school_dashboard'))
+                messages.success(request, message='profile Updated successfully..')
+                # return HttpResponseRedirect(reverse('school_dashboard'))
         else:
             user_edit_form = SchoolUserEditForm(instance=request.user)
     else:

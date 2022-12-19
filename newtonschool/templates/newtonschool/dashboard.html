@@ -34,6 +34,7 @@
         <ul>
             <li><a href="{% url 'school_dashboard' %}">HOME</a></li>
             <li><a href="{% url 'school_about' %}">ABOUT</a></li>
+            <li><a href="{% url 'courses' %}">COURSES</a></li>
             {% if not request.user.is_authenticated %}
             <li><a href="{% url 'users_login' %}">USER LOGIN</a></li>
             {% endif %}

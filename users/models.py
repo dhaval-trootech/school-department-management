@@ -1,11 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+USER_CHOICE_VALUE_STUDENT = 'S'
+USER_CHOICE_VALUE_TEACHER = 'T'
 
-# Create your models here.z
+
+# Create your models here.
 class SchoolUser(AbstractUser):
-    USER_CHOICE = [('T', 'Teacher'),
-                   ('S', 'Student'),
+    USER_CHOICE = [(USER_CHOICE_VALUE_TEACHER, 'Teacher'),
+                   (USER_CHOICE_VALUE_STUDENT, 'Student'),
                    ]
     birthdate = models.DateField(null=True, blank=True)
     phone = models.IntegerField(null=True, blank=True)
@@ -18,4 +21,4 @@ class SchoolUser(AbstractUser):
     terms_conditions = models.BooleanField(default=False)
     user_icon = models.ImageField(upload_to='images/profile-icon', blank=True)
 
-    REQUIRED_FIELDS = ['local_address', 'email', 'user_icon']
+    REQUIRED_FIELDS = ['local_address', 'email']

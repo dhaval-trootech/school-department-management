@@ -46,7 +46,21 @@ background-size: auto 100%;
 
 .pf-dp {
     width: 40%;
+    outline: 2px solid rosybrown;
 }
+
+
+.user-icon-label {
+    position: absolute;
+    right: 18.1rem;
+    top: 5.8rem;
+    cursor: alias;
+}
+
+.user-icon {
+    display: none;
+}
+
 
 
 

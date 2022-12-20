@@ -31,6 +31,8 @@ class StudentCourseBillingView(TemplateView):
     def post(self, request, *args, **kwargs):
         student_enroll = StudentEnrollCourseModelForm(request.POST)
         if student_enroll.is_valid():
+            print("DATA+++request++", request.POST, end='\n\n')
+            print("DATA+++CLEAN++", student_enroll.cleaned_data)
             stu_enroll_model_object = student_enroll.save(commit=False)
             stu_enroll_model_object.student_standard = request.user.standard
             stu_enroll_model_object.price = 0

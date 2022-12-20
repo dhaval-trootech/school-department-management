@@ -9,6 +9,7 @@
     <!--      CUSTOM CSS LINK....-->
     <link rel="stylesheet" href="{% static 'students/css/students.css' %}">
     <title>Student Enroll Course</title>
+
 </head>
 <body>
 
@@ -22,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <!-- Single item -->
-                        <div class="row">
+                        <div class="row" id="cart-item-1">
                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                 <!-- Image -->
                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
@@ -41,7 +42,7 @@
                                 <p><strong>Fronted Course</strong></p>
                                 <p>Teacher: Jaydip Parmar</p>
                                 <p>Offered: Newton School</p>
-                                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" onclick=itemRemoveFirst()
                                         title="Remove item">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -77,7 +78,7 @@
                         <hr class="my-4"/>
 
                         <!-- Single item -->
-                        <div class="row">
+                        <div class="row" id="cart-item-2">
                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                 <!-- Image -->
                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
@@ -96,7 +97,8 @@
                                 <p><strong>Backend Course</strong></p>
                                 <p>Teacher: Karan Dave</p>
                                 <p>Offered: Newton School</p>
-                                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                                <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
+                                        onclick=itemRemoveSecond()
                                         title="Remove item">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -151,7 +153,11 @@
                             <li
                                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                 Courses
-                                <span>$53.98</span>
+                                {% for course_obj in courses %}
+                                {% if course_obj.price != 0 %}
+                                <span>{{course_obj.price}}</span>
+                                {% endif %}
+                                {% endfor %}
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                 Placement Support
@@ -169,9 +175,9 @@
                             </li>
                         </ul>
 
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                        <a href="{% url 'course_billing' %}" class="btn btn-primary btn-lg btn-block">
                             Go to checkout
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -182,5 +188,8 @@
 <script src="https://kit.fontawesome.com/8294e1c522.js" crossorigin="anonymous"></script>
 <!-- bootstrap js file link  -->
 <script src="{% static 'js/bootstrap.js' %}"></script>
+<!-- custom js file link  -->
+<script src="{% static 'students/js/students.js' %}"></script>
+
 </body>
 </html>

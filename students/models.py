@@ -15,3 +15,4 @@ class Courses(models.Model):
     enroll_time = models.DateTimeField(auto_now_add=True)
     course_type = models.CharField(max_length=10, blank=True)
     course_price = models.IntegerField(blank=True)
+    course_confirmation = models.BooleanField()

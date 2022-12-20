@@ -142,9 +142,12 @@
             <div class="btn">
                 {% for course_obj in courses %}
                 {% if course_obj.course_type == 'free' %}
+                {% if course_obj.course_name == 'Devops' and course_obj.course_type == 'free' %}
                 <a href="{% url 'student_course_enroll' %}" class="btn btn-info">Enroll</a>
                 {% else %}
                 <a href="{% url 'student_course_enroll' %}" class="btn btn-info">Purchase</a>
+                {% endif %}
+
                 {% endif %}
                 {% endfor %}
             </div>

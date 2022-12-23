@@ -12,6 +12,8 @@
 </head>
 <body>
 <div class="wrapper">
+    {% for course in courses_list %}
+    {% if course.course_name %}
     <div class="table basic">
         <div class="price-section">
             <div class="price-area">
@@ -19,140 +21,26 @@
                        <span class="text">
                          &#8377;
                        </span>
-                    {% for course_obj in courses %}
-                    {% if course_obj.course_name == 'Fronted' %}
-                    <span class="price">{{course_obj.price}}</span>
-                    {% endif %}
-                    {% endfor %}
+                    <span class="price">{{course.price}}</span>
                 </div>
             </div>
         </div>
         <div class="package-name">
-            {% for course_obj in courses %}
-            {% if course_obj.course_name == 'Fronted' %}
-            <h1 class="course-heading">{{course_obj.course_name}}</h1>
-            {% endif %}
-            {% endfor %}
+            <h1 class="course-heading">{{course.course_name}}</h1>
         </div>
-        <div class="features">
-            <li>
-                <span class="list-name">Learn Basics of HTML,CSS,JS.</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">HTML semantic tags, input tags</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">CSS all properties </span>
-                <span class="icon cross"><i class="far fa-times-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Javascript ,Jquery, Ajax</span>
-                <span class="icon cross"><i class="far fa-times-circle"></i></span>
-            </li>
-            <div class="btn">
-                <a href="{%url 'student_course_enroll' %}" class="btn btn-info">Purchase</a>
-            </div>
+        <div class="features" style="text-align:center;">
+            <span>{{ course.course_description }}</span>
+        </div>
+        <div class="btn-div-box">
+            {% if course.course_type == 'paid' %}
+            <a href="{% url 'student_course_enroll' course.id %}" class="btn btn-info">Purchase</a>
+            {% else %}
+            <a href="{% url 'student_course_enroll' course.id %}" class="btn btn-success">Enroll</a>
+            {% endif %}
         </div>
     </div>
-    <div class="table Premium">
-        <div class="price-section">
-            <div class="price-area">
-                <div class="inner-area">
-                       <span class="text">
-                         &#8377;
-                       </span>
-                    {% for course_obj in courses %}
-                    {% if course_obj.course_name == 'Backend' %}
-                    <span class="price">{{course_obj.price}}</span>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="package-name">
-            {% for course_obj in courses %}
-            {% if course_obj.course_name == 'Backend' %}
-            <h1 class="course-heading">{{course_obj.course_name}}</h1>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class="features">
-            <li>
-                <span class="list-name">Learn about Networking</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Python and Django Framework</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Django Restfull APIs</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Django with AWS</span>
-                <span class="icon cross"><i class="far fa-times-circle"></i></span>
-            </li>
-            <div class="btn">
-                <a href="{%url 'student_course_enroll' %}" class="btn btn-info">Purchase</a>
-            </div>
-        </div>
-    </div>
-    <div class="table Ultimate">
-        <div class="price-section">
-            <div class="price-area">
-                <div class="inner-area">
-                       <span class="text">
-                          &#8377;
-                       </span>
-                    {% for course_obj in courses %}
-                    {% if course_obj.course_name == 'Devops' %}
-                    <span class="price">{{course_obj.price}}</span>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="package-name">
-            {% for course_obj in courses %}
-            {% if course_obj.course_name == 'Devops' %}
-            <h1 class="course-heading">{{course_obj.course_name}}</h1>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <div class="features">
-            <li>
-                <span class="list-name">Learn about AWS/GCP</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Learn Kubernetes and Docker</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">AWS service EC2, Lambda</span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <li>
-                <span class="list-name">Working with Jenkins </span>
-                <span class="icon check"><i class="fas fa-check-circle"></i></span>
-            </li>
-            <div class="btn">
-                {% for course_obj in courses %}
-                {% if course_obj.course_type == 'free' %}
-                {% if course_obj.course_name == 'Devops' and course_obj.course_type == 'free' %}
-                <a href="{% url 'student_course_enroll' %}" class="btn btn-info">Enroll</a>
-                {% else %}
-                <a href="{% url 'student_course_enroll' %}" class="btn btn-info">Purchase</a>
-                {% endif %}
-
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% endif %}
+    {% endfor %}
 </div>
 </body>
 </html>

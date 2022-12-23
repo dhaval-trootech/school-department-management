@@ -56,14 +56,14 @@ body {
 
 input[type=text] {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
 label {
-  margin-bottom: 10px;
+  margin-top: 10px;
   display: block;
 }
 
@@ -114,15 +114,6 @@ span.price {
 
 
 
-
-
-
-
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -138,21 +129,21 @@ span.price {
                     <div class="col-50">
                         <h3>Billing Address</h3>
                         <label for="id_student_name"><i class="fa fa-user"></i> Full Name</label>
-                        {{student_enroll.student_name}} {{student_enroll.student_name.errors|striptags}}
+                        {{student_enroll.student_name}} <span class="errorlist">{{student_enroll.student_name.errors|striptags}} </span>
                         <label for="id_student_email"><i class="fa fa-envelope"></i> Email</label>
-                        {{student_enroll.student_email}} {{student_enroll.student_email.errors|striptags}}
+                        {{student_enroll.student_email}} <span class="errorlist">{{student_enroll.student_email.errors|striptags}} </span>
                         <label for="id_student_address"><i class="fa fa-address-card-o"></i> Address</label>
-                        {{student_enroll.student_address}} {{student_enroll.student_address.errors|striptags}}
+                        {{student_enroll.student_address}} <span class="errorlist">{{student_enroll.student_address.errors|striptags}} </span>
                         <label for="id_student_city"><i class="fa fa-institution"></i> City</label>
-                        {{student_enroll.student_city}} {{student_enroll.student_city.errors|striptags}}
+                        {{student_enroll.student_city}} <span class="errorlist">{{student_enroll.student_city.errors|striptags}} </span>
                         <div class="row">
                             <div class="col-50">
                                 <label for="id_student_state">State</label>
-                                {{student_enroll.student_state}} {{student_enroll.student_state.errors|striptags}}
+                                {{student_enroll.student_state}} <span class="errorlist"> {{student_enroll.student_state.errors|striptags}} </span>
                             </div>
                             <div class="col-50">
                                 <label for="id_student_zip">Zip</label>
-                                {{student_enroll.student_zip}} {{student_enroll.student_zip.errors|striptags}}
+                                {{student_enroll.student_zip}} <span class="errorlist">{{student_enroll.student_zip.errors|striptags}} </span>
                             </div>
                         </div>
 
@@ -172,11 +163,11 @@ span.price {
                     </div>
 
                 </div>
-                <label class="course-confirm-label">
-                    <input type="checkbox" checked="checked" name="course_confirmation"> i am confirmed my order.
-                </label>
-                <span class="errorlist">{{student_enroll.course_confirmation.errors|striptags}}</span>
-                <input type="submit" value="Continue to Payment page" class="btn">
+
+                <!--PAYMENT GATEWAY ---<> STRIPE-BTN  START-->
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}"
+                        data-description="Payment Gateway" data-amount="500" data-locale="auto"></script>
+                <!--PAYMENT GATEWAY ---<> STRIPE-BTN  END-->
             </form>
         </div>
     </div>

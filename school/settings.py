@@ -101,8 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'users.SchoolUser'
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -130,3 +128,9 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MY CUSTOM SETTINGS ---->
+AUTH_USER_MODEL = 'users.SchoolUser'
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51MHMDcSDtbLMILvbqC4GzZDruOEsb3DZnsCx5HkBHytxYFZUDQoKZGHzC0Xy4INvIXrm81QhlkgRqk1ho6DBSMVW00srWKPpcJ'
+STRIPE_SECRET_KEY = 'sk_test_51MHMDcSDtbLMILvbzTwJiSPYZmGwf64Q3onwP3zZQQJXoU00CPqONO1KVVuisg1hofDjZExsH5h3G8s9Yzo1ZEAj00XPIXupZs'

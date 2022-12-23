@@ -53,6 +53,13 @@
         </div>
     </div>
 
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            {{ courses_fm.user.label_tag }}
+            {{ courses_fm.user }} <span class="errorlist"> {{courses_fm.user.errors|striptags}} </span>
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Add course</button>
 </form>
 

@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Courses
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -41,5 +42,8 @@ class CoursesManageView(TemplateView):
 class CoursesDeleteView(TemplateView):
 
     def get(self, request, course_del_id):
-        Courses.objects.get(id=course_del_id).delete()
-        return HttpResponseRedirect(reverse('course_manage'))
+        print(course_del_id)
+        if request.user.user_type == USER_CHOICE_VALUE_TEACHER:
+            Courses.objects.get(id=course_del_id).delete()
+        return HttpResponseRedirect(reverse('school_dashboard'))
+        # return JsonResponse(reverse({"hello"}))

@@ -1,20 +1,16 @@
 from .models import Courses
 from django import forms
-from django.forms import ValidationError
-
-COURSE_TYPE_CHOICES = [('free', 'FREE'),
-                       ('paid', 'PAID')]
 
 
 class TeacherCoursesModelForm(forms.ModelForm):
     class Meta:
         model = Courses
-        fields = ('course_name', 'standard', 'course_description', 'course_type', 'price')
+        fields = ('course_name', 'standard', 'course_description', 'course_type', 'price', 'user')
         widgets = {
             'course_name': forms.TextInput(attrs={'class': 'form-control'}),
             'standard': forms.NumberInput(attrs={'class': 'form-control'}),
             'course_description': forms.Textarea(attrs={'class': 'form-control'}),
-            'course_type': forms.RadioSelect(choices=COURSE_TYPE_CHOICES),
+            'course_type': forms.RadioSelect(),
             'price': forms.NumberInput(attrs={'class': 'form-control'})
 
         }

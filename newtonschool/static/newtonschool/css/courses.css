@@ -19,7 +19,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .wrapper .table{
@@ -28,6 +28,10 @@ body{
     padding: 30px 30px;
     position: relative;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.features {
+    min-height: 150px;
 }
 
 @media (max-width: 1020px){
@@ -109,34 +113,11 @@ body{
     font-weight: bolder;
 }
 
-.table .features li{
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
 
-.features li .list-name{
-    font-size: 17px;
-    font-weight: 400;
-}
-
-.features li .icon{
-    font-size: 15px;
-}
-
-.features li .icon.check{
-    color: #2db94d;
-}
-
-.features li .icon.cross{
-    color: #cd3241;
-}
-
-.table .btn{
+.table .btn-div-box{
     display: flex;
     justify-content: center;
-    margin-top: 35px;
+    margin-top: 1.2rem;
 }
 
 .table .btn button{

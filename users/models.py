@@ -22,3 +22,17 @@ class SchoolUser(AbstractUser):
     user_icon = models.ImageField(upload_to='images/profile-icon', blank=True)
 
     REQUIRED_FIELDS = ['local_address', 'email']
+
+
+class UserAddresses(models.Model):
+    street1 = models.CharField(max_length=400)
+    street2 = models.CharField(max_length=400)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=30)
+    country = models.CharField(max_length=30)
+    pincode = models.IntegerField()
+    is_default = models.BooleanField(default=True)
+    user = models.ForeignKey('SchoolUser', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'users_addresses'

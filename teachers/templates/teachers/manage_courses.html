@@ -13,19 +13,18 @@
 <!--Teacher Manage its Courses-->
 <div class="container">
 
-    <!--PYTHON IF-ELSE CONDITION CARD - 1  --- START  -->
+    <!--PYTHON IF-ELSE CONDITION CARDS  --- START  -->
     {% for course_obj in course_data %}
-    {% if course_obj.course_name == 'Fronted' %}
-    <div class="card">
+    <div class="card" id="card-item-{{course_obj.id}}">
         <div class="card-header">
             <img src="{% static 'teachers/images/fronted-course.png' %}" alt="rover"/>
         </div>
         <div class="card-body">
-            <span class="tag tag-teal">PAID</span>
+            <span class="tag tag-teal">{{course_obj.course_type}}</span>
             <h4>
                 {{ course_obj.course_name }}
             </h4>
-            <p>
+            <p class="course-description">
                 {{ course_obj.course_description }}
             </p>
 
@@ -37,78 +36,14 @@
                     <small>{{ course_obj.updated_at }}</small>
                 </div>
             </div>
-            <a id="course-1" href="{% url 'course_delete' course_obj.id %}" class="btn btn-danger">Delete
-                Course</a>
         </div>
+        {% if request.user.get_full_name == course_obj.teacher_name %}
+        <button id="course-del-btn" class="btn btn-danger" onclick="removeCourse({{course_obj.id}})">Delete
+            Course
+        </button>
+        {% endif %}
     </div>
-    {% endif %}
     {% endfor %}
-    <!--PYTHON IF-ELSE CONDITION CARD - 1 --- END  -->
-
-    <!--PYTHON IF-ELSE CONDITION CARD - 2  --- START  -->
-    {% for course_obj in course_data %}
-    {% if course_obj.course_name == 'Backend' %}
-    <div class="card">
-        <div class="card-header">
-            <img src="{% static 'teachers/images/backend-course.jpg' %}"
-                 alt="ballons"/>
-        </div>
-        <div class="card-body">
-            <span class="tag tag-purple">{{ course_obj.course_type }}</span>
-            <h4>
-                {{ course_obj.course_name }}
-            </h4>
-            <p>
-                {{ course_obj.course_description }}
-            </p>
-
-            <div class="user">
-                <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8sn9zF15pW59JIYiLgx3PQ3EyZLFp5Zqao906l=s32-c-mo"
-                     alt="user"/>
-                <div class="user-info">
-                    <h5>{{ course_obj.teacher_name }}</h5>
-                    <small>{{ course_obj.updated_at }}</small>
-                </div>
-            </div>
-            <a id="course-2" href="{% url 'course_delete' course_obj.id %}" class="btn btn-danger">Delete
-                Course </a>
-        </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    <!--PYTHON IF-ELSE CONDITION CARD - 2 --- END  -->
-
-
-    <!--PYTHON IF-ELSE CONDITION CARD - 3  --- START  -->
-    {% for course_obj in course_data %}
-    {% if course_obj.course_name == 'Devops' %}
-    <div class="card">
-        <div class="card-header">
-            <img src="{% static 'teachers/images/devops-course.jpg' %}" alt="city"/>
-        </div>
-        <div class="card-body">
-            <span class="tag tag-pink">FREE</span>
-            <h4>
-                {{ course_obj.course_name }}
-            </h4>
-            <p>
-                {{ course_obj.course_description }}
-            </p>
-
-            <div class="user">
-                <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8sn9zF15pW59JIYiLgx3PQ3EyZLFp5Zqao906l=s32-c-mo"/>
-                <div class="user-info">
-                    <h5>{{ course_obj.teacher_name }}</h5>
-                    <small>{{ course_obj.updated_at }}</small>
-                </div>
-            </div>
-            <a id="course-3" href="{% url 'course_delete' course_obj.id %}" class="btn btn-danger">Delete
-                Course</a>
-        </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    <!--PYTHON IF-ELSE CONDITION CARD - 3 --- END  -->
 </div>
 <!--jQuery CDN Link-->
 <script src="https://code.jquery.com/jquery-3.6.2.min.js"

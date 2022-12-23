@@ -49,7 +49,7 @@ body {
 .card {
   margin: 10px;
   background-color: #fff;
-  border-radius: 15px;
+  border-radius: 25px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
@@ -62,10 +62,11 @@ body {
 .card-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   padding: 20px;
   min-height: 250px;
+  flex-grow: 0;
 }
 
 .tag {
@@ -90,11 +91,9 @@ body {
 
 .card-body p {
   font-size: 13px;
-  margin: 0 0 40px;
 }
 .user {
   display: flex;
-  margin-top: auto;
 }
 
 .user img {
@@ -110,6 +109,10 @@ body {
   color: #545d7a;
 }
 
-#course-1, #course-2, #course-3 {
-    margin: 1rem auto;
+
+.course-description {
+    width: 100%;
+    text-align: left;
+    min-height: 80px;
 }
+

@@ -5,24 +5,20 @@ from django.views.generic import TemplateView
 from teachers.models import Courses
 from .forms import StudentEnrollCourseModelForm
 from school import settings
-from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
 
 
-class StudentCoursesEnrollCreateView(CreateView):
+class StudentCoursesEnrollDetailView(DetailView):
     # NEED IMPROVEMENTS ---->
     template_name = 'students/student_enroll_courses.html'
     model = Courses
 
-    def get(self, request, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return render(request, self.template_name, context)
-
-    def get_queryset(self):
-        queryset = Courses.objects.get(id=self.kwargs)
-        return queryset
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(Courses, pk=self.kwargs['pk'])
 
 
 class StudentCourseBillingView(TemplateView):
@@ -30,7 +26,7 @@ class StudentCourseBillingView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['student_enroll'] = StudentEnrollCourseModelForm()
+        context['form'] = StudentEnrollCourseModelForm()
         context['key'] = settings.STRIPE_PUBLISHABLE_KEY
         return render(request, self.template_name, context)
 
@@ -45,4 +41,4 @@ class StudentCourseBillingView(TemplateView):
 
             return HttpResponseRedirect(reverse('school_dashboard'))
         else:
-            return render(request, self.template_name, {'student_enroll': student_enroll})
+            return render(request, self.template_name, {'form': student_enroll})

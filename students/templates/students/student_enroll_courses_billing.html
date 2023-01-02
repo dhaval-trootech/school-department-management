@@ -114,6 +114,22 @@ span.price {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -124,45 +140,7 @@ span.price {
         <div class="container">
             <form method="post">
                 {% csrf_token %}
-
-                <div class="row">
-                    <div class="col-50">
-                        <h3>Billing Address</h3>
-                        <label for="id_student_name"><i class="fa fa-user"></i> Full Name</label>
-                        {{student_enroll.student_name}} <span class="errorlist">{{student_enroll.student_name.errors|striptags}} </span>
-                        <label for="id_student_email"><i class="fa fa-envelope"></i> Email</label>
-                        {{student_enroll.student_email}} <span class="errorlist">{{student_enroll.student_email.errors|striptags}} </span>
-                        <label for="id_student_address"><i class="fa fa-address-card-o"></i> Address</label>
-                        {{student_enroll.student_address}} <span class="errorlist">{{student_enroll.student_address.errors|striptags}} </span>
-                        <label for="id_student_city"><i class="fa fa-institution"></i> City</label>
-                        {{student_enroll.student_city}} <span class="errorlist">{{student_enroll.student_city.errors|striptags}} </span>
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="id_student_state">State</label>
-                                {{student_enroll.student_state}} <span class="errorlist"> {{student_enroll.student_state.errors|striptags}} </span>
-                            </div>
-                            <div class="col-50">
-                                <label for="id_student_zip">Zip</label>
-                                {{student_enroll.student_zip}} <span class="errorlist">{{student_enroll.student_zip.errors|striptags}} </span>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="id_course_name" class="partial-disabled-label">Course Name</label>
-                                {{student_enroll.course_name}}
-                            </div>
-                            <div class="col-50">
-                                <label for="id_course_price" class="partial-disabled-label">Course Price</label>
-                                {{student_enroll.course_price}}
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
+                {{form.as_p}}
 
                 <!--PAYMENT GATEWAY ---<> STRIPE-BTN  START-->
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ key }}"

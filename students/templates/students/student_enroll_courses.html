@@ -24,7 +24,7 @@
                         <!--   CART ITEM ENDED-->
 
 
-                        {% for course in courses %}
+                        {% if object %}
                         <div class="row" id="cart-item">
                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                 <!-- Image -->
@@ -41,8 +41,8 @@
 
                             <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                 <!-- Data -->
-                                <p><strong>{{course.course_name}}</strong></p>
-                                <p>{{course.teacher_name}}</p>
+                                <p><strong>{{object.course_name}}</strong></p>
+                                <p>{{object.user.get_full_name}}</p>
                                 <p>Offered: Newton School</p>
                                 <button type="button" class="btn btn-primary btn-sm me-1 mb-2" onclick=itemRemoveFirst()
                                         title="Remove item">
@@ -63,12 +63,12 @@
                                 <!-- Price -->
                                 <p class="text-start text-md-center">
 
-                                    <strong> {{course.price}} </strong>
+                                    <strong> {{object.price}} </strong>
                                 </p>
                                 <!-- Price -->
                             </div>
                         </div>
-                        {% endfor %}
+                        {% endif %}
                         <!--   CART ITEM ENDED-->
                     </div>
                 </div>

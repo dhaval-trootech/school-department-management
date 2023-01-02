@@ -33,9 +33,9 @@
         </div>
         <div class="btn-div-box">
             {% if course.course_type == 'paid' %}
-            <a href="{% url 'student_course_enroll' course.id %}" class="btn btn-info">Purchase</a>
+            <a href="{% url 'student_course_enroll' pk=course.id %}" class="btn btn-info">Purchase</a>
             {% else %}
-            <a href="{% url 'student_course_enroll' course.id %}" class="btn btn-success">Enroll</a>
+            <a href="{% url 'student_course_enroll' pk=course.id %}" class="btn btn-success">Enroll</a>
             {% endif %}
         </div>
     </div>

@@ -15,6 +15,7 @@
 
     <!--PYTHON IF-ELSE CONDITION CARDS  --- START  -->
     {% for course_obj in course_data %}
+    {% if request.user.id == course_obj.user.id %}
     <div class="card" id="card-item-{{course_obj.id}}">
         <div class="card-header">
             <img src="{% static 'teachers/images/fronted-course.png' %}" alt="rover"/>
@@ -32,17 +33,16 @@
                 <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8sn9zF15pW59JIYiLgx3PQ3EyZLFp5Zqao906l=s32-c-mo"
                      alt="user"/>
                 <div class="user-info">
-                    <h5>{{ course_obj.teacher_name }}</h5>
+                    <h5>{{ course_obj.user.get_full_name }}</h5>
                     <small>{{ course_obj.updated_at }}</small>
                 </div>
             </div>
         </div>
-        {% if request.user.get_full_name == course_obj.teacher_name %}
         <button id="course-del-btn" class="btn btn-danger" onclick="removeCourse({{course_obj.id}})">Delete
             Course
         </button>
-        {% endif %}
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 <!--jQuery CDN Link-->

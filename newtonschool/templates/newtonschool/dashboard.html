@@ -42,14 +42,12 @@
         {% if request.user.is_authenticated %}
         <!--        bootstrap dropdown burger-->
         <div class="dropdown navbar-nav">
-            {% if request.user.user_icon %}
             <img class="login-icon" src="{{ request.user.user_icon.url }}" alt="User Profile Image"/>
-            {% endif %}
-            <a href="#" class="user-pf">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+            <a href="#" class="user-pf">{{ request.user.get_full_name }}</a>
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-toggle="dropdown" aria-expanded="false">
+            >
             </button>
-            <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+            <ul class="dropdown-menu p-0" id="dropdown-ul">
                 <li><a class="dropdown-item" href="{% url 'user_profile_edit' %}">My Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
             </ul>

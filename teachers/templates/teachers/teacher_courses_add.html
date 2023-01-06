@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <!--      CUSTOM CSS LINK....-->
     <link rel="stylesheet" href="{% static 'teachers/css/teachers.css' %}">
-    <title>Teacher Courses</title>
+    {% block title %}
+    <title>Courses Add</title>
+    {% endblock %}
 </head>
 <body>
 
@@ -17,50 +19,44 @@
     {% csrf_token %}
     <div class="form-row">
         <div class="form-group col-md-3">
-            {{ courses_fm.course_name.label_tag }}
-            {{ courses_fm.course_name }} <span class="errorlist"> {{courses_fm.course_name.errors|striptags}} </span>
+            {{ form.course_name.label_tag }}
+            {{ form.course_name }} <span class="errorlist"> {{form.course_name.errors|striptags}} </span>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-3">
-            {{ courses_fm.course_description.label_tag }}
-            {{ courses_fm.course_description }} <span class="errorlist"> {{courses_fm.course_description.errors|striptags}} </span>
-        </div>
-    </div>
-
-
-    <div class="form-row">
-        <div class="form-group col-md-3">
-            {{ courses_fm.standard.label_tag }}
-            {{ courses_fm.standard }} <span class="errorlist"> {{courses_fm.standard.errors|striptags}} </span>
+            {{ form.course_description.label_tag }}
+            {{ form.course_description }} <span class="errorlist"> {{form.course_description.errors|striptags}} </span>
         </div>
     </div>
 
 
     <div class="form-row">
         <div class="form-group col-md-3">
-            {{ courses_fm.course_type.label_tag }}
-            {{ courses_fm.course_type }} <span class="errorlist"> {{courses_fm.course_type.errors|striptags}} </span>
+            {{ form.standard.label_tag }}
+            {{ form.standard }} <span class="errorlist"> {{form.standard.errors|striptags}} </span>
         </div>
     </div>
 
 
     <div class="form-row">
         <div class="form-group col-md-3">
-            {{ courses_fm.price.label_tag }}
-            {{ courses_fm.price }} <span class="errorlist"> {{courses_fm.price.errors|striptags}} </span>
+            {{ form.course_type.label_tag }}
+            {{ form.course_type }} <span class="errorlist"> {{form.course_type.errors|striptags}} </span>
         </div>
     </div>
+
 
     <div class="form-row">
         <div class="form-group col-md-3">
-            {{ courses_fm.user.label_tag }}
-            {{ courses_fm.user }} <span class="errorlist"> {{courses_fm.user.errors|striptags}} </span>
+            {{ form.price.label_tag }}
+            {{ form.price }} <span class="errorlist"> {{form.price.errors|striptags}} </span>
         </div>
     </div>
-
+    {% block updateBTN %}
     <button type="submit" class="btn btn-primary">Add course</button>
+    {% endblock %}
 </form>
 
 

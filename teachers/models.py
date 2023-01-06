@@ -11,7 +11,7 @@ class Courses(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     course_type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES)
     price = models.IntegerField()
-    user = models.ForeignKey('users.SchoolUser', on_delete=models.CASCADE, limit_choices_to={'user_type': 'T'})
+    teacher = models.ForeignKey('users.SchoolUser', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.course_name

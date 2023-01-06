@@ -23,3 +23,10 @@ document.querySelectorAll('.course-3 .box .video video').forEach(vid =>{
 //document.querySelector('#close-vid').onclick = () =>{
 //    mainVid.classList.remove('active');
 //}
+
+$('#dropdownMenuButton1').click( function() {
+    $('#dropdown-ul').toggleClass("show-dropdown");
+
+
+
+});

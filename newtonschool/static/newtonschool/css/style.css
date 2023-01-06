@@ -794,14 +794,19 @@ section {
 }
 
 
- .dropdown-menu.show {
+.navbar-nav .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 2px;
     z-index: 1000;
-    display: inline-grid;
 }
 
+
+
+.show-dropdown {
+    display: inline-grid;
+
+}
 
 .dropdown-toggle.btn {
     margin: 0;

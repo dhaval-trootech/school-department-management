@@ -12,6 +12,3 @@ class Courses(models.Model):
     course_type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES)
     price = models.IntegerField()
     teacher = models.ForeignKey('users.SchoolUser', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.course_name

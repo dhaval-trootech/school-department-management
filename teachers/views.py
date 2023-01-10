@@ -56,13 +56,10 @@ class CoursesDeleteView(DeleteView):
     def get(self, request, *args, **kwargs):
         return HttpResponse("<h1>Get Request Forbidden </h1>")
 
-    def post(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
     def delete(self, request, *args, **kwargs):
         object = self.get_object()
         object.delete()
-        data = {'success': 'OK'}
+        data = {'success': 'Course Deleted Successfully..'}
         return JsonResponse(data)
 
 
@@ -77,5 +74,5 @@ class CoursesUpdateView(UpdateView):
     def form_valid(self, form):
         form.save()
         return JsonResponse({
-            'data': form.cleaned_data
+            'data': "Successfully Updated Course.."
         })

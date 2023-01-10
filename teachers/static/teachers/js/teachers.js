@@ -1,9 +1,9 @@
 function removeCourse(id){
     $.ajax({
-    type: 'post' ,
+    type: 'DELETE' ,
     url: `/teachers/courses/manage/delete/${id}/`,
-    data: {
-        csrfmiddlewaretoken: WindowCSRF
+    headers: {
+        "X-CSRFToken": WindowCSRF,
     },
     success:function(){
     $(`#card-item-${id}`).remove();
@@ -18,6 +18,7 @@ function removeCourse(id){
 
 $('form[id="update-course-form"]').submit(function(event) {
   event.preventDefault(); // Prevent the form from being submitted
+  console.log("I am Serialize++", $(this).serialize())
 
   $.ajax({
     url: $(this).attr('action'),
@@ -25,6 +26,7 @@ $('form[id="update-course-form"]').submit(function(event) {
     data: $(this).serialize(),
     success: function(response) {
     console.log("AJAX update succesfully");
+    location.reload();
 
     }
   });

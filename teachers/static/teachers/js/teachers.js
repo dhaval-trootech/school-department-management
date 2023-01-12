@@ -1,4 +1,6 @@
-function removeCourse(id){
+$("button[data-type='delete']").click( function (){
+    let id = $(this).attr('id')
+
     $.ajax({
     type: 'DELETE' ,
     url: `/teachers/courses/manage/delete/${id}/`,
@@ -10,8 +12,7 @@ function removeCourse(id){
     console.log("Success!" +  "and token" + `${WindowCSRF}`);
   }
     });
-};
-
+});
 
 
 
@@ -26,6 +27,7 @@ $('form[id="update-course-form"]').submit(function(event) {
     data: $(this).serialize(),
     success: function(response) {
     console.log("AJAX update succesfully");
+
     location.reload();
 
     }

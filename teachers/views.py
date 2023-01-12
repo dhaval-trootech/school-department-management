@@ -31,16 +31,23 @@ def course_success_add(request):
 
 
 class CoursesManageView(LoginRequiredMixin, ListView):
-    login_url = '/users/login'
     model = Courses
     template_name = 'teachers/manage_courses.html'
     context_object_name = 'course_data'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        elif not request.user.user_type == USER_CHOICE_VALUE_TEACHER:
+            LOGIN_URL = self.get_login_url()
+            return redirect(LOGIN_URL)
+        return super().dispatch(request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         self.object_list = self.get_queryset(request)
         context = super().get_context_data(**kwargs)
-        # instance = context.get('course_data')[0]
-        context['form'] = TeacherCoursesModelForm()
+        instance = context.get('course_data')[0]
+        context['form'] = TeacherCoursesModelForm(instance=instance)
         return render(request, self.template_name, context)
 
     # Override get_queryset for filtering current login teacher courses
@@ -59,8 +66,14 @@ class CoursesDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         object = self.get_object()
         object.delete()
-        data = {'success': 'Course Deleted Successfully..'}
+        data = {'success': True, 'message': 'Course Delete....'}
         return JsonResponse(data)
+
+    # Only Courses Available with current user teacher
+    def get_queryset(self):
+        qs = super().get_queryset()
+        current_login_teacher_courses = qs.filter(teacher=self.request.user)
+        return current_login_teacher_courses
 
 
 class CoursesUpdateView(UpdateView):
@@ -75,4 +88,5 @@ class CoursesUpdateView(UpdateView):
         form.save()
         return JsonResponse({
             'data': "Successfully Updated Course.."
+
         })

@@ -11,19 +11,21 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def teacher_courses(request):
-    if request.user.user_type == USER_CHOICE_VALUE_TEACHER:
-        if request.method == "POST":
-            course_form = TeacherCoursesModelForm(request.POST)
-            if course_form.is_valid():
-                final_course_save = course_form.save(commit=False)
-                final_course_save.teacher = request.user
-                final_course_save.save()
-                return redirect('course_success')
-        else:
+    if request.user.is_authenticated:
+        if request.user.user_type == USER_CHOICE_VALUE_TEACHER:
             course_form = TeacherCoursesModelForm()
+            if request.method == "POST":
+                course_form = TeacherCoursesModelForm(request.POST)
+                if course_form.is_valid():
+                    final_course_save = course_form.save(commit=False)
+                    final_course_save.teacher = request.user
+                    final_course_save.save()
+                    return redirect('course_success')
+            return render(request, 'teachers/teacher_courses_add.html', {'form': course_form})
+        else:
+            return HttpResponse("You Are Not Teacher..")
     else:
-        return HttpResponse("You Are Not Teacher....")
-    return render(request, 'teachers/teacher_courses_add.html', {'form': course_form})
+        return HttpResponseRedirect(reverse('users_login'))
 
 
 def course_success_add(request):

@@ -1,9 +1,8 @@
 from django.db import models
+from .choices import COURSE_TYPE_CHOICES
 
 
 class Courses(models.Model):
-    COURSE_TYPE_CHOICES = [('free', 'FREE'),
-                           ('paid', 'PAID')]
     course_name = models.CharField(max_length=255)
     standard = models.IntegerField()
     course_description = models.TextField()

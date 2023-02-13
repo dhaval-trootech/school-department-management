@@ -46,17 +46,22 @@ class CoursesManageView(LoginRequiredMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.object_list = self.get_queryset(request)
-        context = super().get_context_data(**kwargs)
-        instance = context.get('course_data')[0]
-        context['form'] = TeacherCoursesModelForm(instance=instance)
+        super().get(request, *args, **kwargs)
+        context = self.get_context_data()
         return render(request, self.template_name, context)
 
     # Override get_queryset for filtering current login teacher courses
-    def get_queryset(self, request):
+    def get_queryset(self):
         qs = super().get_queryset()
-        current_login_teacher_courses = qs.filter(teacher=request.user)
+        current_login_teacher_courses = qs.filter(teacher=self.request.user)
         return current_login_teacher_courses
+
+    # Override get_context_data to send some extra forms
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        instance = context.get('course_data')[0]
+        context['form'] = TeacherCoursesModelForm(instance=instance)
+        return context
 
 
 class CoursesDeleteView(DeleteView):

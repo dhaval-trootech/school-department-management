@@ -101,7 +101,7 @@ def users_login(request):
 # User Logout
 def log_out(request):
     logout(request)
-    return redirect('/newtonschool')
+    return redirect('school_dashboard')
 
 
 # User Password Reset

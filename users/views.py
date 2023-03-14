@@ -1,11 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from .forms import SchoolUserModelForm, SchoolUserLoginForm, FormChangePassword, SchoolUserEditForm
 from .models import SchoolUser
-import time
-from django.contrib import messages
 
 
 # Create your views here.
@@ -81,11 +80,8 @@ def users_login(request):
     if request.method == 'POST':
         user_login_form = SchoolUserLoginForm(request.POST)
         if user_login_form.is_valid():
-            uname = user_login_form.cleaned_data.get('username')
-            upass = user_login_form.cleaned_data.get('password')
-            user = authenticate(username=uname, password=upass)
-            print("I am UserAuth++", type(user), type(request.user), end='\n\n')
-            if user is not None:
+            user = user_login_form.cleaned_data
+            if user:
                 login(request, user)
                 return redirect('school_dashboard')
         else:

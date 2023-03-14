@@ -26,10 +26,18 @@ $('form[id="update-course-form"]').submit(function(event) {
     type: 'POST',
     data: $(this).serialize(),
     success: function(response) {
-    console.log("AJAX update succesfully");
+            console.log("M RESPONSE++", typeof(response))
+             var alertDanger = document.querySelector('.alert-danger');
+            if (response.status === 'success') {
+                location.reload();
 
-    location.reload();
-
+            } else {
+                for (let key in response.errors) {
+                    let error_message = response.errors[key];
+                    alertDanger.innerHTML = `${response.status}! ${key.toUpperCase()} - ${error_message}`;
+                }
+                alertDanger.classList.add('msg-failed-show');
+            };
     }
   });
 });

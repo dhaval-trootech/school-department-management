@@ -89,11 +89,11 @@ class CoursesUpdateView(UpdateView):
     success_url = "/teachers/courses/manage"
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("<h1> GET Request Forbidden, Only POST request support </h1>")
+        return JsonResponse({'method': "Get Method Not Allowed."})
 
     def form_valid(self, form):
         form.save()
-        return JsonResponse({
-            'data': "Successfully Updated Course.."
+        return JsonResponse({"status": "success", 'message': 'form updated successfully..'})
 
-        })
+    def form_invalid(self, form):
+        return JsonResponse({"status": "failed", 'errors': form.errors})

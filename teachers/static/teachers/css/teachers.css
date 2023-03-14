@@ -123,3 +123,7 @@ body {
 .fade {
     transition: opacity .19s linear;
     }
+
+.msg-failed-show {
+    display: block!important;
+}

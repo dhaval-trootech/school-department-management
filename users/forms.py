@@ -103,10 +103,9 @@ class SchoolUserLoginForm(forms.Form):
         user = authenticate(username=val_username, password=val_password)
         print("M USER", user)
         if user is not None:
-            if user.check_password(val_password):
-                return self.cleaned_data
-        else:
-            raise ValidationError("You entered incorrect password.")
+            return user
+        if val_username:
+            self.add_error('password', "You entered incorrect password.")
 
 
 class FormChangePassword(PasswordChangeForm):

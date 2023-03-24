@@ -93,7 +93,7 @@ class CoursesUpdateView(UpdateView):
 
     def form_valid(self, form):
         form.save()
-        return JsonResponse({"status": "success", 'message': 'form updated successfully..'})
+        return JsonResponse({"status": "success", 'message': 'form updated successfully..'}, status=200)
 
     def form_invalid(self, form):
-        return JsonResponse({"status": "failed", 'errors': form.errors})
+        return JsonResponse({"status": "failed", 'errors': form.errors}, status=400)

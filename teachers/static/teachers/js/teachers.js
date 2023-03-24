@@ -29,9 +29,12 @@ $('form[id="update-course-form"]').submit(function(event) {
             console.log("M RESPONSE++", typeof(response))
              var alertDanger = document.querySelector('.alert-danger');
             if (response.status === 'success') {
-                location.reload();
+                debugger;
+                window.location.href = location.href;
 
-            } else {
+                }
+
+            else {
                 for (let key in response.errors) {
                     let error_message = response.errors[key];
                     alertDanger.innerHTML = `${response.status}! ${key.toUpperCase()} - ${error_message}`;

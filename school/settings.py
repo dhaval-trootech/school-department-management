@@ -87,7 +87,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 fdsf
-# MY CUSTOM SETTINGS ---->dfgdfg
+# MY CUSTOM SETTINGS ---->dfgdfggfgfdg
 AUTH_USER_MODEL = 'users.SchoolUser'
 LOGIN_URL = '/users/login'
 

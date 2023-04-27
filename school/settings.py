@@ -75,9 +75,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static', ]
-
+ewrt
 # Base url to serve media files
-MEDIA_URL = 'media/'
+MEDIA_URL = 'medsia/'
 
 # Path where media is stored
 MEDIA_ROOT = BASE_DIR / 'media'

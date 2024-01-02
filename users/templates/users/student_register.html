@@ -15,7 +15,7 @@
 
 <!--    Student Registration Form-->
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" novalidate>
     {% csrf_token %}    <!-- Django Cross Site Verification -->
     {% block teacher_reg %}
     <div class="form-row mt-2">

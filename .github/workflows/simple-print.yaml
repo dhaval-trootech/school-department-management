@@ -2,7 +2,7 @@ name: Simple Print Workflow
 
 on:
   push:
-    branches: [ feat/github-workflow-setup ]
+    branches: [ feat/github-workflow-setup-2 ]
 
 jobs:
   print:

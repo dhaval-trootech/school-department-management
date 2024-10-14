@@ -1,0 +1,20 @@
+name: Simple Print Workflow
+
+on:
+  push:
+    branches: [ feat/github-workflow-setup ]
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print messages
+        run: |
+          echo "Hello, this is a simple GitHub Actions workflow!"
+          echo "It runs on every push to the feat/github-workflow-setup branch."
+          echo "You can customize this workflow to perform other actions."
+          echo "Good luck with your project!"

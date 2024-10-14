@@ -12,6 +12,7 @@ def newton_school_dashboard(request):
 
 
 def newton_school_about(request):
+    """Simple about view"""
     return render(request, "newtonschool/about.html")
 
 

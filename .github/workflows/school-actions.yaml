@@ -61,7 +61,7 @@ jobs:
 
       - name: Set up the Django project
         env:
-          my_settings: ${{ env.DJANGO_DHaVAL }}
+          my_settings: ${{ env.DJANGO_DHAVAL }}
         run: |
           echo "This is my settings: ${my_settings}"
           echo "This is my settings2: ${mY_settings}"
@@ -69,5 +69,8 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "settings test module: ${{ env.DJANGO_SETTINGS_MODULE }}"
+          echo "settings test module: ${{ env.USER }}"
           python manage.py test
+          python -c "import sys; print(sys.path)"
+          python -c "import sys; print(sys.executable)"
+          python -c "import os; print(os.environ)"

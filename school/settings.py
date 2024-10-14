@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "users",
     "newtonschool",
     "payments",
-    "dj_payments.apps.common",
+    # "dj_payments.apps.common",
     "django_extensions",
 ]
 

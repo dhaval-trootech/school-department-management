@@ -60,8 +60,6 @@ jobs:
 
 
       - name: Set up the Django project
-        env:
-          DJANGO_SETTINGS_MODULE: "ok"
         run: |
           python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
           python manage.py migrate
@@ -69,7 +67,7 @@ jobs:
 
       - name: Run tests
         run: |
-          echo "settings test module: ${{ env.USER }}"
+          python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
           python manage.py test
           pwd
           python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"

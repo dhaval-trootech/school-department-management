@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.db import connection
+import os
 from django.shortcuts import reverse
 from users.models import SchoolUser
 
@@ -23,8 +25,11 @@ class UserModelTest(TestCase):
         self.user.save()
 
     def test_user_creation(self):
-        from django.db import connection
         print("I AM 1st TEST CASE")
+        print("Django_Settings_Module", os.environ.get("DJANGO_SETTINGS_MODULE", "Nothing"))
+        print("Project Owner", os.environ.get("PROJECT_OWNER", "Nothing"))
+        print("City: ", os.environ.get("CITY", "Nothing"))
+
         print("Database Conf: ", connection.settings_dict)
         """
         This test case will use to check the User creation verification status. It catches any errors occurred

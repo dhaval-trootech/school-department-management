@@ -55,7 +55,7 @@ jobs:
       - name: Set up Apache Solr
         run: |
           docker exec ct-solr solr create -c electo_core -d sample_techproducts_configs
-          echo "Solr core 'electo_core' created"    
+          echo "Solr core 'electo_core' successfully created"    
 
       - name: Install dependencies
         run: |

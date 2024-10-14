@@ -23,7 +23,9 @@ class UserModelTest(TestCase):
         self.user.save()
 
     def test_user_creation(self):
+        from django.db import connection
         print("I AM 1st TEST CASE")
+        print("Database Conf: ", connection.settings_dict)
         """
         This test case will use to check the User creation verification status. It catches any errors occurred
         during creation process of User instance.

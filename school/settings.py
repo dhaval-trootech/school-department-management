@@ -146,4 +146,3 @@ LOGIN_URL = "/users/login"
 # Paypal Credentials
 PAYPAL_CLIENT_ID = env.str("PAYPAL_SECRET_KEY", default="")
 PAYPAL_SECRET_KEY = env.str("PAYPAL_SECRET_KEY", default="")
-breakpoint()

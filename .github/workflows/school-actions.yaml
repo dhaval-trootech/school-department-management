@@ -30,7 +30,7 @@ jobs:
           SOLR_JAVA_MEM: '-Xms512m -Xmx512m'
     steps:
       - name: Print settings module
-        run: >
+        run: |
           echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
           echo "Project City is set to: ${{ secrets.CITY }}"
@@ -50,7 +50,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Create Solr core
-        run: >
+        run: |
           docker exec test-solr solr create -c electo_core -d sample_techproducts_configs
           echo "Solr core 'electo_core' created"
 

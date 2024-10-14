@@ -30,11 +30,19 @@ jobs:
           SOLR_JAVA_MEM: '-Xms512m -Xmx512m'
     steps:
       - name: Print settings module
+        env:
+          STATE: "Gujarat"
+          STATE2: MP
+          BRO: ${{ vars.PROJECT_OWNER }}
         run: |
           echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
           echo "Project City is set to: ${{ secrets.CITY }}"
           echo "The secret Country is: ${{ secrets.COUNTRY }}"
+          echo "Step env Guj state: ${STATE}"
+          echo "Step env MP state2: ${STATE2}"
+          echo "i AM bRO lower: ${bro}"
+          echo "i AM bRO UPPER: ${BRO}"
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -57,7 +65,6 @@ jobs:
       - name: Set up the Django project
         run: |
           python manage.py migrate
-          python manage.py collectstatic --noinput
 
       - name: Run tests
         run: |

@@ -31,13 +31,13 @@ jobs:
     steps:
       - name: Print settings module
         env:
-          STATE: "Gujarat"
+          MY_CUSTOM: ${{ vars.PROJECT_OWNER }}
         run: |
           echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
-          echo "Using v1 single dollar ${PROJECT_OWNER}"
-          echo "Using v2 single dollar ${DJANGO_SETTINGS_MODULE}"
-          echo "Using v3 single dollar ${vars.PROJECT_OWNER}"
+          echo ${{ vars.PROJECT_OWNER }}
+          echo "Using block context: ${MY_CUSTOM}"
+
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -59,7 +59,10 @@ jobs:
 
 
       - name: Set up the Django project
+        env:
+          STATE: "Gujarat"
         run: |
+          echo "Inside main context: ${STATE}"
           python manage.py migrate
 
       - name: Run tests

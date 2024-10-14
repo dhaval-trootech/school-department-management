@@ -66,10 +66,7 @@ jobs:
           python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
 
       - name: Run tests
-        env:
-          DJANGO_SETTINGS_MODULE: "school.settings"
         run: |
-          python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
+          ls
           python manage.py test
-          pwd
-          python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
+      

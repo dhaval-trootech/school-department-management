@@ -6,8 +6,10 @@ name: Django DRF with Apache Solr and PostgreSQL CI
   pull_request:
     branches:
       - main
+env:
+  DJANGO_SETTINGS_MODULE: "school.test_settings"
 jobs:
-  test:
+  job1:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -35,8 +37,7 @@ jobs:
         run: |
           echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
-          echo ${{ vars.PROJECT_OWNER }}
-          echo "Using block context: ${MY_CUSTOM}"
+          echo "settings module: ${{ env.DJANGO_SETTINGS_MODULE }}"
 
 
       - name: Checkout code
@@ -60,12 +61,12 @@ jobs:
 
       - name: Set up the Django project
         env:
-          STATE: "Gujarat"
+          my_settings: ${{ env.DJANGO_SETTINGS_MODULE }}
         run: |
-          echo "Inside main context: ${STATE}"
+          echo "This is my settings: ${my_settings}"
           python manage.py migrate
 
       - name: Run tests
         run: |
-          echo "Inside run test: ${STATE}"
+          echo "settings test module: ${{ env.DJANGO_SETTINGS_MODULE }}"
           python manage.py test

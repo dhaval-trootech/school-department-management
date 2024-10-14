@@ -32,17 +32,12 @@ jobs:
       - name: Print settings module
         env:
           STATE: "Gujarat"
-          STATE2: MP
-          BRO: ${{ vars.PROJECT_OWNER }}
         run: |
           echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
-          echo "Project City is set to: ${{ secrets.CITY }}"
-          echo "The secret Country is: ${{ secrets.COUNTRY }}"
-          echo "Step env Guj state: ${STATE}"
-          echo "Step env MP state2: ${STATE2}"
-          echo "i AM bRO lower: ${bro}"
-          echo "i AM bRO UPPER: ${BRO}"
+          echo "Using v1 single dollar ${PROJECT_OWNER}"
+          echo "Using v2 single dollar ${DJANGO_SETTINGS_MODULE}"
+          echo "Using v3 single dollar ${vars.PROJECT_OWNER}"
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -61,7 +56,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          echo "Inside dependencies: ${STATE}"
+
 
       - name: Set up the Django project
         run: |
@@ -69,4 +64,5 @@ jobs:
 
       - name: Run tests
         run: |
+          echo "Inside run test: ${STATE}"
           python manage.py test

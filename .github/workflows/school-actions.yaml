@@ -31,11 +31,10 @@ jobs:
     steps:
       - name: Print settings module
         run: >
-          echo "DJANGO_SETTINGS_MODULE is set to: ${{
-          vars.DJANGO_SETTINGS_MODULE }}"
+          echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
           echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
           echo "Project City is set to: ${{ secrets.CITY }}"
-          echo "The secret Country is: ${{ secrets.COUNTRY }}""
+          echo "The secret Country is: ${{ secrets.COUNTRY }}"
 
       - name: Checkout code
         uses: actions/checkout@v4

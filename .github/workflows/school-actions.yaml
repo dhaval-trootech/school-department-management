@@ -1,74 +1,67 @@
-name: Django DRF with Apache Solr and PostgreSQL CI
-'on':
+name: Django DRF with Apache Solr and PostgreSQL CI/CD
+
+on: # Triggers for the workflow
   push:
     branches:
-      - feat/github-workflow-setup
+      - feat/github-workflow-setup  # Only runs on this feature branch
   pull_request:
     branches:
-      - main
+      - main  # Runs on pull requests to the target main branch
+
 env:
-  DJANGO_SETTINGS_MODULE: "school.test_settings"
-  ACTOR: ${{ vars.ACTOR }}
+  DJANGO_SETTINGS_MODULE: "school.test_settings"  # Global environment variable for Django settings
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
     services:
       postgres:
         image: 'postgres:14'
         env:
-          POSTGRES_DB: test_electo_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_electo_db  # Postgres database name
+          POSTGRES_USER: postgres  # Postgres user
+          POSTGRES_PASSWORD: postgres  # Postgres password
         ports:
-          - '5432:5432'
-        options:
-          --name ct-postgres
-          --health-cmd "pg_isready -U postgres" --health-interval 10s
-          --health-timeout 5s --health-retries 5
+          - '5432:5432'  # Map PostgreSQL port
+        options: >-  # Define health check options for the Postgres service
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
       solr:
-        image: 'solr:8.9.0'
+        image: 'solr:8.10.0'  # Use Apache Solr 8.10.0
         ports:
-          - '8983:8983'
-        options: '--name ct-solr -e SOLR_HEAP=512m'
-        env:
-          SOLR_JAVA_MEM: '-Xms512m -Xmx512m'
+          - '8983:8983'  # Map Solr port for access
+
     steps:
-      - name: Print settings module
+      - name: Print environment and secret variables
         run: |
           echo "Project Owner Variable: ${{ vars.PROJECT_OWNER }}"
-          echo "Actor glob variable name: ${{ vars.ACTOR }}"
-          echo "Actor ENV variable name: ${{ env.ACTOR }}"
-          echo "Country repo secret variable name: ${{ secrets.COUNTRY }}"
-          docker ps -a
-          docker image ls
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Checkout the repository code
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5  # Set up Python 3.8.15 for the workflow
         with:
-          python-version: "3.9"
+          python-version: "3.8.15"
 
-      - name: Set up Apache Solr
+      - name: Set up Apache Solr core
         env:
-          SOLR_CORE_NAME: "test_electo_core" # Solr Core Name
+          SOLR_CORE_NAME: "test_electo_core"  # Solr core name
+          SOLR_CORE_CONFIGS: "sample_techproducts_configs"
         run: |
-          docker exec ct-solr solr create -c ${SOLR_CORE_NAME}  -d sample_techproducts_configs
-          echo "Solr core named: ${SOLR_CORE_NAME} successfully created."   
-          curl "http://localhost:8983/solr/admin/cores?core=${SOLR_CORE_NAME}"
+          docker exec ct-solr solr create -c ${SOLR_CORE_NAME} -d ${SOLR_CORE_CONFIGS}
+          echo "Solr core named '${SOLR_CORE_NAME}' has been successfully created."
 
-      - name: Install dependencies
+      - name: Install dependencies and set up Django project
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-
-      - name: Set up the Django project
-        run: |
           python manage.py migrate
 
       - name: Run tests
         run: |
-          python manage.py test
+          python manage.py test  # Run Django tests

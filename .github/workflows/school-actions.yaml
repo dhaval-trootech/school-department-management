@@ -32,13 +32,12 @@ jobs:
           SOLR_JAVA_MEM: '-Xms512m -Xmx512m'
     steps:
       - name: Print settings module
-        env:
-          MY_CUSTOM: ${{ vars.PROJECT_OWNER }}
         run: |
-          echo "DJANGO_SETTINGS_MODULE is set to: ${{ vars.DJANGO_SETTINGS_MODULE }}"
-          echo "Project owner is set to: ${{ vars.PROJECT_OWNER }}"
-          echo "settings module: ${{ env.DJANGO_DHAVAL }}"
-
+          echo "Project Owner Variable: ${{ vars.PROJECT_OWNER }}"
+          echo "Actor variable name: ${{ vars.ACTOR }}"
+          echo "Country repo secret variable name: ${{ secrets.COUNTRY }}"
+          docker ps -a
+          docker image ls
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,9 +48,12 @@ jobs:
           python-version: "3.9"
 
       - name: Set up Apache Solr
+        env:
+          SOLR_CORE_NAME: "test_electo_core"
         run: |
-          docker exec ct-solr solr create -c electo_core -d sample_techproducts_configs
-          echo "Solr core 'electo_core' successfully created"    
+          docker exec ct-solr solr create -c ${SOLR_CORE_NAME}  -d sample_techproducts_configs
+          echo "Solr core named: ${SOLR_CORE_NAME} successfully created."   
+          curl "http://localhost:8983/solr/admin/cores?core=${SOLR_CORE_NAME}"
 
       - name: Install dependencies
         run: |
@@ -61,12 +63,8 @@ jobs:
 
       - name: Set up the Django project
         run: |
-          python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
-          python manage.py migrate
-          python -c "import os; print(os.environ.get('DJANGO_SETTINGS_MODULE'))"
+          - python manage.py migrate
 
       - name: Run tests
         run: |
-          ls
           python manage.py test
-      

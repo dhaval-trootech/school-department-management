@@ -29,6 +29,7 @@ class UserModelTest(TestCase):
         print("Django_Settings_Module", os.environ.get("DJANGO_SETTINGS_MODULE", "Nothing"))
         print("Project Owner", os.environ.get("PROJECT_OWNER", "Nothing"))
         print("City: ", os.environ.get("CITY", "Nothing"))
+        print("Actor variable:", os.environ.get("ACTOR", "Nothing"))
 
         print("Database Conf: ", connection.settings_dict)
         """

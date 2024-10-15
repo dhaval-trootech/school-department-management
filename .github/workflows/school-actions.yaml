@@ -8,6 +8,8 @@ name: Django DRF with Apache Solr and PostgreSQL CI
       - main
 env:
   DJANGO_SETTINGS_MODULE: "school.test_settings"
+  ACTOR: ${{ vars.ACTOR }}
+
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -20,7 +22,8 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - '5432:5432'
-        options: >-
+        options:
+          --name ct-postgres
           --health-cmd "pg_isready -U postgres" --health-interval 10s
           --health-timeout 5s --health-retries 5
       solr:
@@ -34,7 +37,8 @@ jobs:
       - name: Print settings module
         run: |
           echo "Project Owner Variable: ${{ vars.PROJECT_OWNER }}"
-          echo "Actor variable name: ${{ vars.ACTOR }}"
+          echo "Actor glob variable name: ${{ vars.ACTOR }}"
+          echo "Actor ENV variable name: ${{ env.ACTOR }}"
           echo "Country repo secret variable name: ${{ secrets.COUNTRY }}"
           docker ps -a
           docker image ls
@@ -49,7 +53,7 @@ jobs:
 
       - name: Set up Apache Solr
         env:
-          SOLR_CORE_NAME: "test_electo_core"
+          SOLR_CORE_NAME: "test_electo_core" # Solr Core Name
         run: |
           docker exec ct-solr solr create -c ${SOLR_CORE_NAME}  -d sample_techproducts_configs
           echo "Solr core named: ${SOLR_CORE_NAME} successfully created."   

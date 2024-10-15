@@ -34,6 +34,7 @@ jobs:
         image: 'solr:8.10.0'  # Use Apache Solr 8.10.0
         ports:
           - '8983:8983'  # Map Solr port for access
+        options: '--name ct-solr -e SOLR_HEAP=512m'
 
     steps:
       - name: Print environment and secret variables
@@ -50,7 +51,7 @@ jobs:
 
       - name: Set up Apache Solr core
         env:
-          SOLR_CORE_NAME: "test_electo_core"  # Solr core name
+          SOLR_CORE_NAME: "test_electo_core"
           SOLR_CORE_CONFIGS: "sample_techproducts_configs"
         run: |
           docker exec ct-solr solr create -c ${SOLR_CORE_NAME} -d ${SOLR_CORE_CONFIGS}

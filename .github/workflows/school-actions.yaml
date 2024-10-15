@@ -63,7 +63,7 @@ jobs:
 
       - name: Set up the Django project
         run: |
-          - python manage.py migrate
+          python manage.py migrate
 
       - name: Run tests
         run: |

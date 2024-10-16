@@ -34,13 +34,13 @@ stripe==2.56.0
 django-solo==1.1.5
 beautifulsoup4==4.9.3
 django-filter == 2.4.0
-nltk==3.6.1
+nltk
 boto3==1.17.60
 django-storages==1.11.1
 selenium==3.141.0
 django-rest-knox==4.1.0
 xmltodict==0.12.0
-rake-nltk==1.0.4
+rake-nltk
 django-haystack==3.0
 drf-haystack==1.8.10
 elasticsearch==6.8.2

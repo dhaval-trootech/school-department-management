@@ -63,7 +63,7 @@ jobs:
 
       - name: Install dependencies and set up Django project
         run: |
-          pip install --upgrade pip setuptools wheel
+          pip install --upgrade pip
           pip install --no-cache-dir -r development.txt
           python manage.py migrate
 

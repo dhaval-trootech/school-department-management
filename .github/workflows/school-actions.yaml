@@ -54,13 +54,16 @@ jobs:
           SOLR_CORE_NAME: "test_electo_core"
           SOLR_CORE_CONFIGS: "sample_techproducts_configs"
         run: |
-          docker exec ct-solr solr create -c ${SOLR_CORE_NAME} -d ${SOLR_CORE_CONFIGS}
-          echo "Solr core named '${SOLR_CORE_NAME}' has been successfully created."
+          # Create a new Solr core
+          docker exec ct-solr solr create -c "${SOLR_CORE_NAME}" -d "${SOLR_CORE_CONFIGS}"
+          echo "Successfully created Solr core: '${SOLR_CORE_NAME}'."
+
+          # Reload the Solr core
+          curl "http://localhost:8983/solr/admin/cores?core=${SOLR_CORE_NAME}"
 
       - name: Install dependencies and set up Django project
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --no-cache-dir -r development.txt
           python manage.py migrate
 
       - name: Run tests

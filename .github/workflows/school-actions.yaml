@@ -65,10 +65,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r development.txt
+
+      - name: Install NLTK and download stopwords
+        run: |
+          echo "The home dir: ${HOME}"
+          echo "The NLTK dir: ${NLTK_DATA}"
           ls /home/runner/
-          python -c "import nltk; nltk.download('stopwords')"
+          python -c "import nltk; nltk.download('stopwords')" 
           ls /home/runner/
-          python manage.py migrate
 
       - name: Run tests
         run: |

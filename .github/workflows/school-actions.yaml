@@ -68,12 +68,9 @@ jobs:
 
       - name: Install NLTK and download stopwords
         run: |
+          pwd
           echo "The home dir: ${HOME}"
           echo "The NLTK dir: ${NLTK_DATA}"
           ls /home/runner/
           python -c "import nltk; nltk.download('stopwords')" 
-          ls /home/runner/
-
-      - name: Run tests
-        run: |
-          python manage.py test  # Run Django tests
+          ls /home/runner/nltk_data

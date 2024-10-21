@@ -63,8 +63,11 @@ jobs:
 
       - name: Install dependencies and set up Django project
         run: |
-          pip install --upgrade pip
-          pip install --no-cache-dir -r development.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r development.txt
+          ls /home/runner/
+          python -c "import nltk; nltk.download('stopwords')"
+          ls /home/runner/
           python manage.py migrate
 
       - name: Run tests
